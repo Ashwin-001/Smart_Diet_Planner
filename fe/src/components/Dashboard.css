@@ -1,0 +1,74 @@
+.dashboard-container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #333;
+  color: white;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background-color: #d9534f;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.logout-btn:hover {
+  background-color: #c9302c;
+}
+
+.input-field {
+  padding: 10px;
+  width: 250px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.fetch-btn {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fetch-btn:hover {
+  background-color: #218838;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
