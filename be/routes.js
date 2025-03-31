@@ -1,36 +1,67 @@
 import express from "express";
-import { User } from "./models.js";
-import { storeFoodPreferences } from "./storeNeo4jData.js";
+import { registerUser, loginUser } from "./mapperSchema.js"; // Import register and login functions
 import { generateXMLMapper } from "./mapperSchema.js";
+import User from "./models/UserModel.js";
+import { neo4jDriver } from "./config/neo4j.js"; // ✅ Import Neo4j driver
 
 const router = express.Router();
 
-// Store User Details (MongoDB) & Food Preferences (Neo4j)
-router.post("/register", async (req, res) => {
-    const { userId, name, age, dietType, calorieTarget, foodPreferences } = req.body;
+// Register User (MongoDB + Neo4j)
+router.post("/register", registerUser);
 
-    try {
-        const newUser = new User({ userId, name, age, dietType, calorieTarget });
-        await newUser.save();
+// Login User
+router.post("/login", loginUser);
 
-        await storeFoodPreferences(userId, foodPreferences);
-        
-        res.json({ message: "User Registered in MongoDB & Neo4j" });
-    } catch (error) {
-        res.status(500).json({ error: "Error Registering User" });
+// Fetch Integrated Data (MongoDB + Neo4j) & Return XML
+router.get('/get-user/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // ✅ Fetch user details from MongoDB
+    const user = await User.findOne({ userId }).lean().exec();
+    if (!user) {
+      console.error("❌ User not found in MongoDB:", userId);
+      return res.status(404).send('<error>User not found</error>');
     }
-});
+    console.log("✅ User fetched from MongoDB:", user);
 
-// Fetch Integrated Data (From XML)
-router.get("/get-user/:userId", async (req, res) => {
-    const userId = req.params.userId;
-    
-    try {
-        const xmlData = await generateXMLMapper(userId);
-        res.type("application/xml").send(xmlData);
-    } catch (error) {
-        res.status(500).json({ error: "Error Fetching User Data" });
-    }
+    // ✅ Fetch food preferences from Neo4j
+    const session = neo4jDriver.session(); // ✅ Fix: Use `neo4jDriver.session()`
+    const result = await session.run(
+      `
+      MATCH (u:User {userId: $userId})-[:LIKES]->(f:Food)
+      RETURN COLLECT(f.name) AS foodPreferences
+      `,
+      { userId }
+    );
+    await session.close();
+
+    // Extract food preferences
+    const foodPreferences = result.records.length > 0 ? result.records[0].get('foodPreferences') : [];
+
+    // ✅ Construct XML response
+    let xmlResponse = `
+      <user>
+        <userId>${user.userId}</userId>
+        <name>${user.name}</name>
+        <age>${user.age}</age>
+        <dietType>${user.dietType}</dietType>
+        <calorieTarget>${user.calorieTarget}</calorieTarget>
+        <foodPreferences>
+          ${foodPreferences.length 
+            ? foodPreferences.map(food => `<preference>${food}</preference>`).join('')
+            : '<preference>No preferences found</preference>'
+          }
+        </foodPreferences>
+      </user>
+    `;
+
+    res.header('Content-Type', 'application/xml');
+    res.send(xmlResponse);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).send('<error>Internal Server Error</error>');
+  }
 });
 
 export default router;

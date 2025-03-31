@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<user>
+  <userId>demo1</userId>
+  <name>Demouser</name>
+  <age>23</age>
+  <dietType>Chicken type</dietType>
+  <calorieTarget>3722</calorieTarget>
+  <foodPreferences/>
+</user>
