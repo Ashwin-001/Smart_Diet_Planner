@@ -24,31 +24,34 @@ const SignUp = ({ handleSignUp }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!userId || !name || !age || !dietType || !calorieTarget || !password || foodPreferences.length === 0) {
-      setError('All fields are required, including food preferences');
+    if (!userId || !name || !age || !dietType || !calorieTarget || !password || !foodPreferences) {
+      setError("All fields are required");
       return;
     }
-
     try {
-      const response = await axios.post('http://localhost:5000/register', {
+      const response = await axios.post("http://localhost:5000/register", {
         userId,
         name,
-        age: parseInt(age), // Ensure it's a number
+        age,
         dietType,
-        calorieTarget: parseInt(calorieTarget), // Ensure it's a number
+        calorieTarget,
         password,
-        foodPreferences, // Send food preferences
+        foodPreferences,
       });
-
-      console.log(response.data);
-      handleSignUp();
-      navigate('/login');
+  
+      if (response.status === 201 || response.status === 200) {
+        handleSignUp();
+        navigate("/login"); // Redirect to login after signup
+      } else {
+        setError("Unexpected response from server");
+      }
     } catch (error) {
-      console.error(error.response?.data || error.message);
-      setError(error.response?.data?.message || 'Failed to create user');
+      console.error("Signup error:", error);
+      setError(error.response?.data?.message || "Failed to create user");
     }
   };
+  
+  
 
   const handleBackClick = () => {
     navigate('/login');

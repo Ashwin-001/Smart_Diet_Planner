@@ -8,10 +8,12 @@ const Dashboard = () => {
   const [userId, setUserId] = useState('');
   const [userData, setUserData] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get logged-in username from localStorage/sessionStorage (modify if needed)
+    // Get logged-in username from localStorage/sessionStorage
     const storedUser = localStorage.getItem('loggedInUser');
     if (storedUser) {
       setLoggedInUser(storedUser);
@@ -20,18 +22,29 @@ const Dashboard = () => {
 
   const fetchUserData = async () => {
     try {
-      console.log(`Fetching user data for ID: ${userId}`);
       const res = await axios.get(`http://localhost:5000/get-user/${userId}`, {
         headers: { Accept: 'application/xml' },
       });
-
+  
       const xml = new XMLParser().parseFromString(res.data);
-      setUserData(xml.children);
-      console.log('User data fetched successfully:', xml.children);
+      console.log('Parsed XML Data:', xml.children); // Debugging
+  
+      const structuredData = xml.children.reduce((acc, item) => {
+        if (item.name === 'foodPreferences') {
+          acc[item.name] = item.children.map(food => food.value); // Extract preferences
+        } else {
+          acc[item.name] = item.value;
+        }
+        return acc;
+      }, {});
+  
+      setUserData(structuredData);
     } catch (error) {
-      console.error('Error fetching data', error);
+      console.error('Error fetching data:', error);
     }
   };
+  
+  
 
   const handleLogout = () => {
     localStorage.removeItem('loggedInUser'); // Clear stored user
@@ -51,9 +64,13 @@ const Dashboard = () => {
       <input
         className="input-field"
         placeholder="Enter User ID"
+        value={userId}
         onChange={(e) => setUserId(e.target.value)}
       />
       <button className="fetch-btn" onClick={fetchUserData}>Fetch User Data</button>
+
+      {loading && <p>Loading user data...</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {userData && (
         <table>
@@ -68,16 +85,14 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {userData.map((item, index) => (
-              <tr key={index}>
-                <td>{item.name === 'userId' ? item.value : ''}</td>
-                <td>{item.name === 'name' ? item.value : ''}</td>
-                <td>{item.name === 'age' ? item.value : ''}</td>
-                <td>{item.name === 'dietType' ? item.value : ''}</td>
-                <td>{item.name === 'calorieTarget' ? item.value : ''}</td>
-                <td>{item.name === 'foodPreferences' ? item.value : ''}</td>
-              </tr>
-            ))}
+            <tr>
+              <td>{userData.userId}</td>
+              <td>{userData.name}</td>
+              <td>{userData.age}</td>
+              <td>{userData.dietType}</td>
+              <td>{userData.calorieTarget}</td>
+              <td>{userData.foodPreferences ? userData.foodPreferences.join(', ') : 'N/A'}</td>
+            </tr>
           </tbody>
         </table>
       )}
