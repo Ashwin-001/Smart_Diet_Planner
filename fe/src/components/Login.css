@@ -1,58 +1,122 @@
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #121212; /* Dark theme */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full-screen height */
+}
+
+/* Login container styling */
 .login-container {
-  width: 300px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Adjusted width for better proportions */
+  padding: 30px; /* Increased padding for a spacious layout */
+  background-color: #1e1e1e; /* Dark gray background for the box */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Subtle shadow effect */
 }
 
 .login-container h2 {
   text-align: center;
+  color: #ffffff; /* White text for the title */
+  margin-bottom: 20px;
 }
 
+/* Form control styling */
 .form-control {
   margin-bottom: 20px;
 }
 
 .form-control label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  color: #bdbdbd; /* Light gray text for labels */
 }
 
 .form-control input {
-  width: 100%;
+  width: calc(100% - 20px); /* Full width minus padding */
   height: 40px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border-radius: 6px; /* Rounded corners for input fields */
+  border: none; /* Remove default border */
+  background-color: #2c2c2c; /* Darker gray background for inputs */
+  color: #ffffff; /* White text for inputs */
 }
 
+.form-control input::placeholder {
+  color: #757575; /* Placeholder text color */
+}
+
+/* Styling for error messages */
+.error-msg {
+  color: #ff5252; /* Red error message color */
+}
+
+/* Login button styling */
 button[type="submit"] {
-  width: 100%;
-  height: 40px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  width: 100%; /* Full width of the container */
+  height: 45px; /* Increased height for better visibility */
+  background-color: #007bff; /* Blue button color */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 6px; /* Rounded corners */
+  font-size: 16px; /* Slightly larger font size for readability */
+  font-weight: bold; /* Bold text for emphasis */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight scaling effect on hover */
 }
 
+button[type="submit"]:active {
+  transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+/* Sign-up button styling */
 .signup-btn {
-  width: 100%;
-  height: 40px;
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  width: 100%; /* Full width of the container */
+  height: 45px; /* Same height as login button */
+  background-color: #6c757d; /* Gray button color */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 6px; /* Rounded corners */
+  font-size: 16px; /* Consistent font size with login button */
+  font-weight: bold;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 10px; /* Space between buttons */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .signup-btn:hover {
-  background-color: #5a6268;
+  background-color: #5a6268; /* Darker gray on hover */
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+.signup-btn:active {
+  transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+/* Styling for error messages */
+.error-msg {
+  color: #ff5252; /* Bright red for error messages */
+  font-size: small;
+}
+
+/* Input focus styling for better accessibility */
+.form-control input:focus {
+  outline: none; /* Remove default outline */
+  border: none;
+  box-shadow: inset 0px -2px #007bff, inset -2px -2px #007bff; /* Subtle blue glow inside input field */
+}
+
+/* Add smooth transitions to all interactive elements */
+button,
+input {
+  transition: all 0.3s ease-in-out;
 }

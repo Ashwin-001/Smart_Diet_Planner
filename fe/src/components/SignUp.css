@@ -1,54 +1,124 @@
+/* Global styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #121212; /* Dark theme */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full-screen height */
+}
+
+/* Signup container styling */
 .signup-container {
-  width: 300px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 300px;
+  width: 400px; /* Adjusted width for better proportions */
+  padding: 30px; /* Increased padding for a spacious layout */
+  background-color: #1e1e1e; /* Dark gray background for the box */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5); /* Subtle shadow effect */
 }
 
 .signup-container h2 {
   text-align: center;
+  color: #ffffff; /* White text for the title */
+  margin-bottom: 20px; /* Added space below heading */
 }
 
+/* Back button styling */
 .back-btn {
-  width: 100%;
-  height: 40px;
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  width: 100%; /* Full width of the container */
+  height: 45px; /* Increased height for better visibility */
+  background-color: #6c757d; /* Gray button color */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 6px; /* Rounded corners */
+  font-size: 16px; /* Consistent font size */
+  font-weight: bold;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 10px; /* Space between back button and form */
 }
 
 .back-btn:hover {
-  background-color: #5a6268;
+  background-color: #5a6268; /* Darker gray on hover */
 }
 
+/* Form control styling */
 .form-control {
   margin-bottom: 20px;
 }
 
 .form-control label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  color: #bdbdbd; /* Light gray text for labels */
 }
 
 .form-control input {
-  width: 100%;
+  width: calc(100% - 20px); /* Full width minus padding */
   height: 40px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border-radius: 6px; /* Rounded corners for input fields */
+}
+/* Checkbox group styling */
+.checkbox-group {
+  display: flex; /* Align checkboxes in a row */
+  flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+  gap: 15px; /* Add spacing between checkboxes */
 }
 
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between checkbox and label text */
+  color: #bdbdbd; /* Light gray text for labels */
+  font-size: 14px; /* Consistent font size */
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 16px; /* Uniform width for all checkboxes */
+  height: 16px; /* Uniform height for all checkboxes */
+}
+
+/* Error message styling */
+.error-msg {
+  color: #ff5252; /* Bright red for error messages */
+  font-size: small;
+}
+
+/* Signup button styling */
 button[type="submit"] {
-  width: 100%;
-  height: 40px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  width: 100%; /* Full width of the container */
+  height: 45px; /* Increased height for better visibility */
+  background-color: #007bff; /* Blue button color */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 6px; /* Rounded corners */
+  font-size: 16px; /* Consistent font size */
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+button[type="submit"]:active {
+  transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+/* Input focus styling for better accessibility */
+.form-control input:focus {
+  outline: none; /* Remove default outline */
+  border: none;
+  box-shadow: inset 0px -2px #007bff, inset -2px -2px #007bff; /* Subtle blue glow inside input field */
+}
+
+/* Add smooth transitions to all interactive elements */
+button,
+input {
+  transition: all 0.3s ease-in-out;
 }

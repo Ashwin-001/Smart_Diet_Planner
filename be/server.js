@@ -8,6 +8,8 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import User from "./models/UserModel.js";
 import { storeFoodPreferences } from "./storeNeo4jData.js";
+import { generateGlobalXMLSchema } from "./mapperSchema.js";
+
 
 dotenv.config();
 
@@ -41,7 +43,7 @@ connectMongoDB();
   }
 })();
 
-// Register route
+
 app.post("/register", async (req, res) => {
   const { userId, name, age, dietType, calorieTarget, password, foodPreferences } = req.body;
 
@@ -65,13 +67,17 @@ app.post("/register", async (req, res) => {
     // Store food preferences in Neo4j
     await storeFoodPreferences(userId, foodPreferences);
 
-    // ✅ Send a success response with status 201
+    // ✅ Trigger XML Generation after user is created
+    console.log("Generating global XML after registration...");
+    await generateGlobalXMLSchema(); // ✅ Add this line
+
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ message: "Failed to create user" });
   }
 });
+
 
 
 

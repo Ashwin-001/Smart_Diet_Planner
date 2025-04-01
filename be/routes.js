@@ -1,6 +1,7 @@
 import express from "express";
-import { registerUser, loginUser } from "./mapperSchema.js"; // Import register and login functions
-import { generateXMLMapper } from "./mapperSchema.js";
+import { registerUser, loginUser } from "./mapperSchema.js"; 
+// Import register and login functions
+
 import User from "./models/UserModel.js";
 import { neo4jDriver } from "./config/neo4j.js"; // ✅ Import Neo4j driver
 

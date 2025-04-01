@@ -13,53 +13,59 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get logged-in username from localStorage/sessionStorage
-    const storedUser = localStorage.getItem('loggedInUser');
+    const storedUser = localStorage.getItem("loggedInUser");
+    console.log("Stored user in localStorage:", storedUser); // Debugging
     if (storedUser) {
-      setLoggedInUser(storedUser);
+        setLoggedInUser(storedUser);
     }
-  }, []);
+}, []);
+
+
+
 
   const fetchUserData = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/get-user/${userId}`, {
-        headers: { Accept: 'application/xml' },
-      });
-  
-      const xml = new XMLParser().parseFromString(res.data);
-      console.log('Parsed XML Data:', xml.children); // Debugging
-  
-      const structuredData = xml.children.reduce((acc, item) => {
-        if (item.name === 'foodPreferences') {
-          acc[item.name] = item.children.map(food => food.value); // Extract preferences
-        } else {
-          acc[item.name] = item.value;
-        }
-        return acc;
-      }, {});
-  
-      setUserData(structuredData);
+        const res = await axios.get(`http://localhost:5000/get-user/${userId}`, {
+            headers: { Accept: 'application/xml' },
+        });
+
+        const xml = new XMLParser().parseFromString(res.data);
+        console.log('Parsed XML Data:', xml.children); // Debugging
+
+        const structuredData = xml.children.reduce((acc, item) => {
+            if (item.name === 'foodPreferences') {
+                acc[item.name] = [...new Set(item.children.map(food => food.value))]; // Remove duplicates
+            } else {
+                acc[item.name] = item.value;
+            }
+            return acc;
+        }, {});
+
+        setUserData(structuredData);
     } catch (error) {
-      console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error);
     }
-  };
-  
+};
+
   
 
-  const handleLogout = () => {
-    localStorage.removeItem('loggedInUser'); // Clear stored user
-    navigate('/login'); // Redirect to login page
-  };
+const handleLogout = () => {
+  localStorage.removeItem("loggedInUser"); 
+  setLoggedInUser(""); 
+  navigate("/login"); 
+};
+
+
 
   return (
     <div className="dashboard-container">
       {/* Header Section */}
       <div className="dashboard-header">
-        <div className="username">Welcome, {loggedInUser || 'User'}!</div>
+        <div className="username">Welcome, {loggedInUser || 'DemoUser'}!</div>
         <button className="logout-btn" onClick={handleLogout}>Logout</button>
       </div>
 
-      <h1>Smart Diet Planner</h1>
+      <h1>Diet Details Fetcher</h1>
 
       <input
         className="input-field"
@@ -76,12 +82,12 @@ const Dashboard = () => {
         <table>
           <thead>
             <tr>
-              <th>User ID</th>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Diet Type</th>
-              <th>Calorie Target</th>
-              <th>Food Preferences</th>
+              <th>User ID (MongoDB)</th>
+              <th>Name (MongoDB)</th>
+              <th>Age (MongoDB)</th>
+              <th>Diet Type (MongoDB)</th>
+              <th>Calorie Target (MongoDB)</th>
+              <th>Food Preferences (Neo4J)</th>
             </tr>
           </thead>
           <tbody>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './Login.css';
 
 const Login = ({ handleLogin }) => {
@@ -29,11 +30,34 @@ const Login = ({ handleLogin }) => {
     navigate('/signup');
   };
 
+  // Animation Variants
+  const formVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hover: { scale: 1.05 },
+    tap: { scale: 0.95 }
+  };
+
   return (
-    <div className="login-container">
+    <motion.div
+      className="login-container"
+      initial="hidden"
+      animate="visible"
+      variants={formVariants}
+    >
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-control">
+        <motion.div className="form-control" variants={formVariants}>
           <label>User ID:</label>
           <input
             type="text"
@@ -41,8 +65,8 @@ const Login = ({ handleLogin }) => {
             onChange={(e) => setUserId(e.target.value)}
             required
           />
-        </div>
-        <div className="form-control">
+        </motion.div>
+        <motion.div className="form-control" variants={formVariants}>
           <label>Password:</label>
           <input
             type="password"
@@ -50,12 +74,27 @@ const Login = ({ handleLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
+        </motion.div>
         {error && <div className="error-msg">{error}</div>}
-        <button type="submit">Login</button>
+        <motion.button
+          type="submit"
+          variants={buttonVariants}
+          whileHover="hover"
+          whileTap="tap"
+        >
+          Login
+        </motion.button>
       </form>
-      <button className="signup-btn" onClick={handleSignUpClick}>Sign Up</button>
-    </div>
+      <motion.button
+        className="signup-btn"
+        onClick={handleSignUpClick}
+        variants={buttonVariants}
+        whileHover="hover"
+        whileTap="tap"
+      >
+        Sign Up
+      </motion.button>
+    </motion.div>
   );
 };
 

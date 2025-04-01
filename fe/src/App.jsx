@@ -13,6 +13,11 @@ const App = () => {
       setIsLoggedIn(true);
     }
   }, []);
+  
+  const handleSignUp = () => {
+    setIsLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true');
+  };
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -28,7 +33,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp handleSignUp={handleSignUp} />} /> 
         <Route path="/" element={isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Navigate to="/login" />} />
         <Route path="/dashboard" element={isLoggedIn ? <Dashboard handleLogout={handleLogout} /> : <Navigate to="/login" />} />
         <Route path="*" element={<Navigate to={isLoggedIn ? "/dashboard" : "/login"} />} />

@@ -14,47 +14,58 @@ const SignUp = ({ handleSignUp }) => {
   const [foodPreferences, setFoodPreferences] = useState([]); // New state
   const [error, setError] = useState(null);
 
-  // Handle food preferences selection
+
   const handleFoodPreferenceChange = (e) => {
     const { value, checked } = e.target;
-    setFoodPreferences((prev) =>
-      checked ? [...prev, value] : prev.filter((pref) => pref !== value)
-    );
+  
+    setFoodPreferences((prev) => {
+      const uniquePreferences = new Set(prev); // Convert to Set to remove duplicates
+      if (checked) {
+        uniquePreferences.add(value);
+      } else {
+        uniquePreferences.delete(value);
+      }
+      return Array.from(uniquePreferences); // Convert back to array
+    });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!userId || !name || !age || !dietType || !calorieTarget || !password || !foodPreferences) {
-      setError("All fields are required");
-      return;
+        setError("All fields are required");
+        return;
     }
+
     try {
-      const response = await axios.post("http://localhost:5000/register", {
-        userId,
-        name,
-        age,
-        dietType,
-        calorieTarget,
-        password,
-        foodPreferences,
-      });
-  
-      if (response.status === 201 || response.status === 200) {
-        handleSignUp();
-        navigate("/login"); // Redirect to login after signup
-      } else {
-        setError("Unexpected response from server");
-      }
+        const response = await axios.post("http://localhost:5000/register", {
+            userId,
+            name,
+            age,
+            dietType,
+            calorieTarget,
+            password,
+            foodPreferences,
+        });
+
+        if (response.status === 201 || response.status === 200) {
+            localStorage.setItem("loggedInUser", name); // ✅ Store user name in localStorage
+            console.log("User stored in localStorage:", name); // Debugging check
+            navigate("/dashboard"); // Redirect to Dashboard
+        } else {
+            setError("Unexpected response from server");
+        }
     } catch (error) {
-      console.error("Signup error:", error);
-      setError(error.response?.data?.message || "Failed to create user");
+        console.error("Signup error:", error);
+        setError(error.response?.data?.message || "Failed to create user");
     }
-  };
-  
-  
+};
+
+
 
   const handleBackClick = () => {
-    navigate('/login');
+    navigate("/login");
+
   };
 
   return (

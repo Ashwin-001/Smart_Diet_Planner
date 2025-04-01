@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+  <user>
+    <userId>ashwin1</userId>
+    <name>Ashwin</name>
+    <age>20</age>
+    <dietType>High Calorie</dietType>
+    <calorieTarget>2000</calorieTarget>
+    <foodPreferences>No preferences found</foodPreferences>
+  </user>
+  <user>
+    <userId>exampleUser</userId>
+    <name>John Doe</name>
+    <age>30</age>
+    <dietType>Vegetarian</dietType>
+    <calorieTarget>2000</calorieTarget>
+    <foodPreferences>No preferences found</foodPreferences>
+  </user>
+  <user>
+    <userId>sample1</userId>
+    <name>Ashwin</name>
+    <age>20</age>
+    <dietType>Vegetarian</dietType>
+    <calorieTarget>2000</calorieTarget>
+    <foodPreferences>No preferences found</foodPreferences>
+  </user>
+  <user>
+    <userId>user1</userId>
+    <name>Example</name>
+    <age>21</age>
+    <dietType>Non Vegetarian</dietType>
+    <calorieTarget>2050</calorieTarget>
+    <foodPreferences>No preferences found</foodPreferences>
+  </user>
+  <user>
+    <userId>example2</userId>
+    <name>Example2</name>
+    <age>21</age>
+    <dietType>Non-Vegetarian</dietType>
+    <calorieTarget>2575</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+  </user>
+  <user>
+    <userId>demo1</userId>
+    <name>Demouser</name>
+    <age>23</age>
+    <dietType>Chicken type</dietType>
+    <calorieTarget>3722</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Vegetarian</foodPreferences>
+  </user>
+  <user>
+    <userId>bala1</userId>
+    <name>Bala Subramanian </name>
+    <age>20</age>
+    <dietType>Vegetarian</dietType>
+    <calorieTarget>3098</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+    <foodPreferences>Vegetarian</foodPreferences>
+  </user>
+  <user>
+    <userId>bala12</userId>
+    <name>Balu</name>
+    <age>20</age>
+    <dietType>High Calorie</dietType>
+    <calorieTarget>2700</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+    <foodPreferences>Vegetarian</foodPreferences>
+  </user>
+  <user>
+    <userId>bala21</userId>
+    <name>Baluu </name>
+    <age>17</age>
+    <dietType>Low Calory</dietType>
+    <calorieTarget>2499</calorieTarget>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+  </user>
+  <user>
+    <userId>bala211</userId>
+    <name>Bala Su</name>
+    <age>20</age>
+    <dietType>High chicken cal</dietType>
+    <calorieTarget>2121</calorieTarget>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Vegetarian</foodPreferences>
+  </user>
+  <user>
+    <userId>BalaSu12</userId>
+    <name>Bala Su</name>
+    <age>20</age>
+    <dietType>Low Cal Chicken</dietType>
+    <calorieTarget>1299</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+  </user>
+  <user>
+    <userId>Ashwin2</userId>
+    <name>Ashwin K</name>
+    <age>19</age>
+    <dietType>High Calory</dietType>
+    <calorieTarget>1000</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+  </user>
+  <user>
+    <userId>IPLuser</userId>
+    <name>IPL</name>
+    <age>19</age>
+    <dietType>Stamina rich</dietType>
+    <calorieTarget>2002</calorieTarget>
+    <foodPreferences>Sweet</foodPreferences>
+    <foodPreferences>Vegetarian</foodPreferences>
+  </user>
+  <user>
+    <userId>Newuser1</userId>
+    <name>New</name>
+    <age>21</age>
+    <dietType>Healthy</dietType>
+    <calorieTarget>2020</calorieTarget>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+  </user>
+  <user>
+    <userId>Aditya_dp</userId>
+    <name>Aditya DP</name>
+    <age>19</age>
+    <dietType>High Protein</dietType>
+    <calorieTarget>2000</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+  </user>
+  <user>
+    <userId>Example13</userId>
+    <name>Example</name>
+    <age>12</age>
+    <dietType>High Protein</dietType>
+    <calorieTarget>2700</calorieTarget>
+    <foodPreferences>Spicy</foodPreferences>
+    <foodPreferences>Vegetarian</foodPreferences>
+  </user>
+  <user>
+    <userId>Example33</userId>
+    <name>Big Data</name>
+    <age>12</age>
+    <dietType>Medium Calorie</dietType>
+    <calorieTarget>2589</calorieTarget>
+    <foodPreferences>Non-Vegetarian</foodPreferences>
+    <foodPreferences>Sweet</foodPreferences>
+  </user>
+</users>
